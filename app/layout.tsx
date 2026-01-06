@@ -1,20 +1,21 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Geist, Geist_Mono } from 'next/font/google';
+import './globals.css';
+import MuiThemeProvider from './theme/ThemeProvider';
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
-  title: "Next.js Fundamentals",
-  description: "Learning App Router, Tailwind CSS, and Client Components",
+  title: 'Next.js Fundamentals',
+  description: 'Learning App Router, Tailwind CSS, and Client Components',
 };
 
 export default function RootLayout({
@@ -33,13 +34,15 @@ export default function RootLayout({
           text-slate-800
         `}
       >
-        <main className="min-h-screen max-w-5xl mx-auto px-6 py-10">
-          {children}
-        </main>
+        <MuiThemeProvider>
+          <main className="min-h-screen max-w-5xl mx-auto px-6 py-10 space-y-8">
+            {children}
+          </main>
 
-        <footer className="text-center text-sm text-slate-500 py-6">
-          © 2026 Next.js Fundamentals
-        </footer>
+          <footer className="text-center text-sm text-slate-500 py-6">
+            © 2026 Next.js Fundamentals
+          </footer>
+        </MuiThemeProvider>
       </body>
     </html>
   );
