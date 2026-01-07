@@ -1,9 +1,14 @@
 "use client";
 // Marks this file as a Client Component
 // Needed because we are using useState, click events, and browser interactions
+
 import { useState } from "react";
-import MuiTest from "./components/MuiTest"; 
-//  Importing reusable MUI component to see MUI + Theme output
+import MuiTest from "./components/MuiTest";
+// Importing reusable MUI component to see MUI + Theme output
+
+import UiStateTest from "./components/UiStateTest";
+import QueryTest from "./components/QueryTest";
+// ✅ Redux UI state test component (Global state)
 
 export default function HomePage() {
   const [count, setCount] = useState(0);
@@ -11,20 +16,21 @@ export default function HomePage() {
   return (
     <section
       className="
-           max-w-6xl              // limits content width
-        mx-auto               // centers content horizontally
-        my-12                 // margin top & bottom
-        px-6 py-16            // padding
-        rounded-3xl           // rounded container
-        bg-gradient-to-br     // background gradient
+        max-w-6xl
+        mx-auto
+        my-12
+        px-6 py-16
+        rounded-3xl
+        bg-gradient-to-br
         from-indigo-50 via-pink-50 to-purple-50
-        shadow-xl             // outer shadow
-        flex flex-col         // vertical layout
-        items-center          // center items horizontally
-        gap-12                // space between sections
-        text-center           // center text
+        shadow-xl
+        flex flex-col
+        items-center
+        gap-12
+        text-center
       "
     >
+      
       {/* Header */}
       <header className="space-y-4">
         <h1 className="text-5xl font-bold bg-gradient-to-r from-indigo-600 to-pink-500 bg-clip-text text-transparent">
@@ -56,10 +62,15 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* 🔥 MUI TEST OUTPUT (THIS IS WHAT YOU WERE MISSING) */}
+      {/* MUI + Tailwind */}
       <MuiTest />
+      
 
-      {/* Client Component */}
+      {/* ✅ Redux Global State Example */}
+      <UiStateTest />
+      <QueryTest/>
+
+      {/* Client Component (Local State) */}
       <div className="rounded-2xl bg-gradient-to-r from-indigo-500 to-pink-500 p-8 text-white w-full max-w-md shadow-xl">
         <h3 className="text-2xl font-semibold mb-4">
           Client Component Example
