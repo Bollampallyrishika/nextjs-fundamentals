@@ -8,6 +8,8 @@ import MuiTest from "./components/MuiTest";
 
 import UiStateTest from "./components/UiStateTest";
 import QueryTest from "./components/QueryTest";
+import UserTest from "./components/UserTest";
+import Playground from "./components/Playground";
 // ✅ Redux UI state test component (Global state)
 
 export default function HomePage() {
@@ -69,6 +71,8 @@ export default function HomePage() {
       {/* ✅ Redux Global State Example */}
       <UiStateTest />
       <QueryTest/>
+      <UserTest/>
+      <Playground/>
 
       {/* Client Component (Local State) */}
       <div className="rounded-2xl bg-gradient-to-r from-indigo-500 to-pink-500 p-8 text-white w-full max-w-md shadow-xl">

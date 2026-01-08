@@ -1,60 +1,41 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-// TanStack Query hook
 import { useQuery } from "@tanstack/react-query";
 
-// Backend API call
+/*
+  Function that calls backend API
+  NOTE: We return response.data.data (ARRAY ONLY)
+*/
 const fetchUsers = async () => {
-  console.log(" API CALLED: /api/users");
-
   const res = await fetch("/api/users");
 
   if (!res.ok) {
     throw new Error("Failed to fetch users");
   }
 
-  const data = await res.json();
+  const json = await res.json();
 
-  console.log(" API RESPONSE:", data);
-  return data;
+  return json.data; // ✅ ONLY array returned
 };
 
 export default function QueryTest() {
   const {
-    data,
+    data,        // now data === users[]
     isLoading,
     isError,
     error,
     refetch,
   } = useQuery({
-    queryKey: ["users"], // cache key
+    queryKey: ["users"],
     queryFn: fetchUsers,
   });
 
-  // 🔄 Loading state (UI)
-  if (isLoading) {
-    return (
-      <div className="p-6 bg-white rounded-xl shadow text-blue-600">
-        Loading users from backend...
-      </div>
-    );
-  }
-
-  //  Error state (UI)
-  if (isError) {
-    return (
-      <div className="p-6 bg-white rounded-xl shadow text-red-600">
-        Error: {(error as Error).message}
-      </div>
-    );
-  }
+  if (isLoading) return <p>Loading users...</p>;
+  if (isError) return <p>Error: {(error as Error).message}</p>;
 
   return (
-    <div className="p-6 bg-white rounded-xl shadow w-full max-w-md">
-      <h3 className="text-xl font-semibold mb-4 text-indigo-600">
-        Users (Fetched from Backend)
-      </h3>
+    <div className="p-6 bg-white rounded-xl shadow-md w-full max-w-md">
+      <h3 className="text-xl font-semibold mb-4">Users</h3>
 
       {/* UI Data */}
       <ul className="space-y-2 mb-4">
@@ -68,15 +49,11 @@ export default function QueryTest() {
         ))}
       </ul>
 
-      {/* Refetch Button */}
       <button
-        onClick={() => {
-          console.log(" Manual refetch triggered");
-          refetch();
-        }}
-        className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
+        onClick={() => refetch()}
+        className="px-4 py-2 bg-indigo-600 text-white rounded"
       >
-        Refetch Users
+        Refetch
       </button>
     </div>
   );
