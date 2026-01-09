@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useAppDispatch, useAppSelector } from '@/app/redux/hooks';
-import { toggleSidebar } from '@/app/redux/slices/uiSlice';
+import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
+import { toggleSidebar } from "@/app/redux/slices/uiSlice";
 
 export default function UiStateTest() {
   const dispatch = useAppDispatch();
@@ -14,13 +14,13 @@ export default function UiStateTest() {
       <p>
         Sidebar Status:{" "}
         <span className="font-bold text-blue-600">
-          {isOpen ? 'OPEN' : 'CLOSED'}
+          {isOpen ? "OPEN" : "CLOSED"}
         </span>
       </p>
 
       <button
         onClick={() => dispatch(toggleSidebar())}
-        className="px-4 py-2 bg-indigo-600 text-white rounded-md"
+        className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition"
       >
         Toggle Sidebar (Redux)
       </button>

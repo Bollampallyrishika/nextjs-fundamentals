@@ -1,40 +1,24 @@
+// app/components/common/Button.tsx
 "use client";
 
-type ButtonProps = {
-  label: string;                // Button text
-  onClick?: () => void;         // Click handler
-  variant?: "primary" | "secondary";
-  disabled?: boolean;
-};
-
-/*
-  Reusable Button
-  - Props-driven design
-  - Variant based styling
-  - Accessible (button tag + disabled)
-*/
 export default function Button({
   label,
   onClick,
   variant = "primary",
-  disabled = false,
-}: ButtonProps) {
-  const baseStyles =
-    "px-4 py-2 rounded-lg font-medium transition focus:outline-none";
-
-  const variants = {
-    primary: "bg-indigo-600 text-white hover:bg-indigo-700",
-    secondary: "bg-gray-200 text-gray-800 hover:bg-gray-300",
-  };
+}: {
+  label: string;
+  onClick?: () => void;
+  variant?: "primary" | "danger";
+}) {
+  const styles =
+    variant === "danger"
+      ? "bg-red-600 hover:bg-red-700"
+      : "bg-blue-600 hover:bg-blue-700";
 
   return (
     <button
       onClick={onClick}
-      disabled={disabled}
-      aria-disabled={disabled} // accessibility
-      className={`${baseStyles} ${variants[variant]} ${
-        disabled && "opacity-50 cursor-not-allowed"
-      }`}
+      className={`${styles} text-white px-4 py-2 rounded transition`}
     >
       {label}
     </button>

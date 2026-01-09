@@ -1,10 +1,7 @@
-'use client';
+"use client";
 
-// Makes Redux available to the whole app
-
-
-import { store } from '../redux/store';
-import { Provider } from 'react-redux';
+import { Provider } from "react-redux";
+import { store } from "@/app/redux/store";
 
 export default function ReduxProvider({
   children,

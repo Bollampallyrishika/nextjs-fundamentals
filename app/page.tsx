@@ -1,96 +1,75 @@
 "use client";
-// Marks this file as a Client Component
-// Needed because we are using useState, click events, and browser interactions
 
-import { useState } from "react";
-import MuiTest from "./components/MuiTest";
-// Importing reusable MUI component to see MUI + Theme output
-
-import UiStateTest from "./components/UiStateTest";
+import Playground from "./components/Playground";
 import QueryTest from "./components/QueryTest";
 import UserTest from "./components/UserTest";
-import Playground from "./components/Playground";
-// ✅ Redux UI state test component (Global state)
+import UiStateTest from "./components/UiStateTest";
+import Counter from "./components/Counter";
 
-export default function HomePage() {
-  const [count, setCount] = useState(0);
-
+export default function Home() {
   return (
-    <section
-      className="
-        max-w-6xl
-        mx-auto
-        my-12
-        px-6 py-16
-        rounded-3xl
-        bg-gradient-to-br
-        from-indigo-50 via-pink-50 to-purple-50
-        shadow-xl
-        flex flex-col
-        items-center
-        gap-12
-        text-center
-      "
-    >
-      
+    <main className="space-y-12">
       {/* Header */}
-      <header className="space-y-4">
-        <h1 className="text-5xl font-bold bg-gradient-to-r from-indigo-600 to-pink-500 bg-clip-text text-transparent">
+      <section className="text-center">
+        <h1 className="text-5xl font-bold bg-gradient-to-r from-indigo-500 to-pink-500 bg-clip-text text-transparent mb-4">
           Next.js Fundamentals
         </h1>
-        <p className="text-lg text-slate-700">
+
+        <p className="text-xl text-gray-600">
           App Router & File-based Routing
         </p>
-      </header>
+      </section>
 
-      {/* Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-        <div className="rounded-2xl bg-white shadow-md border p-6 hover:shadow-xl transition">
+      {/* Feature Cards */}
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="bg-white rounded-2xl shadow-lg p-6 text-center">
           <h2 className="text-2xl font-semibold text-indigo-600 mb-2">
             App Router
           </h2>
-          <p className="text-slate-600">
+          <p className="text-gray-600">
             Modern routing system using layouts, nested routes, and server components.
           </p>
         </div>
 
-        <div className="rounded-2xl bg-white shadow-md border p-6 hover:shadow-xl transition">
+        <div className="bg-white rounded-2xl shadow-lg p-6 text-center">
           <h2 className="text-2xl font-semibold text-pink-600 mb-2">
             Tailwind CSS
           </h2>
-          <p className="text-slate-600">
+          <p className="text-gray-600">
             Utility-first styling approach for scalable and consistent UI designs.
           </p>
         </div>
-      </div>
+      </section>
 
       {/* MUI + Tailwind */}
-      <MuiTest />
-      
+      <section>
+        <Playground />
+      </section>
 
-      {/* ✅ Redux Global State Example */}
-      <UiStateTest />
-      <QueryTest/>
-      <UserTest/>
-      <Playground/>
+      {/* Redux UI State */}
+      <section>
+        <UiStateTest />
+      </section>
 
-      {/* Client Component (Local State) */}
-      <div className="rounded-2xl bg-gradient-to-r from-indigo-500 to-pink-500 p-8 text-white w-full max-w-md shadow-xl">
-        <h3 className="text-2xl font-semibold mb-4">
-          Client Component Example
-        </h3>
+      {/* Redux Counter */}
+      <section>
+        <Counter />
+      </section>
 
-        <button
-          onClick={() => setCount(count + 1)}
-          className="px-6 py-3 bg-white text-indigo-600 font-medium rounded-full hover:bg-slate-100 transition"
-        >
-          Click Me
-        </button>
+      {/* TanStack Query */}
+      <section>
+        <QueryTest />
+      </section>
 
-        <p className="mt-4 text-lg">
-          Clicked <span className="font-bold">{count}</span> times
-        </p>
-      </div>
-    </section>
+      {/* Users CRUD */}
+      <section>
+        <UserTest />
+      </section>
+
+      {/* Footer */}
+      <footer className="text-center text-gray-500 pt-10">
+        © 2026 Next.js Fundamentals
+      </footer>
+    </main>
   );
 }

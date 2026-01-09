@@ -85,16 +85,16 @@ export async function PUT(request: Request) {
 /* --------------------------------
    DELETE → Remove data (DELETE)
 ----------------------------------*/
-export async function DELETE(request: Request) {
-  const { id } = await request.json();
 
-  users = users.filter((user) => user.id !== id);
+export async function DELETE(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const id = searchParams.get("id");
 
-  return NextResponse.json(
-    {
-      success: true,
-      message: "User deleted successfully",
-    },
-    { status: 200 }
-  );
+  if (!id) {
+    return Response.json({ message: "ID required" }, { status: 400 });
+  }
+
+  return Response.json({ success: true });
 }
+
+

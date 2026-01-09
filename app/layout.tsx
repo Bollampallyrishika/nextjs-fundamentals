@@ -1,56 +1,65 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+"use client";
+
 import "./globals.css";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-import MuiThemeProvider from "./theme/ThemeProvider";
 import ReduxProvider from "./providers/ReduxProvider";
-import QueryProvider from "./providers/QueryProvider"; // ✅ ADD THIS
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
-  title: "Next.js Fundamentals",
-  description: "Redux + TanStack Query + MUI",
-};
+import QueryProvider from "./providers/QueryProvider";
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const router = useRouter();
+
+  const logout = () => {
+    if (typeof window !== "undefined") {
+      localStorage.clear();
+    }
+    router.push("/");
+  };
+
   return (
     <html lang="en">
-      <body
-        className={`
-          ${geistSans.variable}
-          ${geistMono.variable}
-          antialiased
-          bg-slate-100
-          text-slate-800
-        `}
-      >
-        {/* 🔹 Server-state provider */}
+      <body>
         <QueryProvider>
-          {/* 🔹 Global client-state provider */}
           <ReduxProvider>
-            {/* 🔹 UI theme */}
-            <MuiThemeProvider>
-              <main className="min-h-screen max-w-5xl mx-auto px-6 py-10 space-y-8">
+            <div className="flex min-h-screen">
+              {/* Sidebar */}
+              <aside className="w-64 bg-slate-900 text-white p-6">
+                <h1 className="text-2xl font-bold mb-8">Admin Panel</h1>
+
+                <nav className="space-y-4">
+                  <Link
+                    href="/dashboard"
+                    className="block hover:text-blue-400"
+                  >
+                    Dashboard Home
+                  </Link>
+
+                  <Link
+                    href="/dashboard/users/list"
+                    className="block hover:text-blue-400"
+                  >
+                    Users
+                  </Link>
+
+                  <button
+                    onClick={logout}
+                    className="block text-red-400 hover:text-red-300"
+                  >
+                    Logout
+                  </button>
+                </nav>
+              </aside>
+
+              {/* Page Content */}
+              <main className="flex-1 p-8 bg-gray-100">
                 {children}
               </main>
-
-              <footer className="text-center text-sm text-slate-500 py-6">
-                © 2026 Next.js Fundamentals
-              </footer>
-            </MuiThemeProvider>
+            </div>
           </ReduxProvider>
         </QueryProvider>
       </body>
